@@ -1,0 +1,258 @@
+﻿<Window x:Class="ScannerDrivers.CaptureExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScannerDrivers.CaptureExample"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:Icon="http://schemas.fontawesome.io/icons/"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Height="720" Width="1280" WindowState="Normal" WindowStyle="None" Background="Transparent"
+        AllowsTransparency="True"
+        FlowDirection="LeftToRight">
+
+    <Window.Resources>
+        <!-- ModernTextBoxStyle -->
+        <Style x:Key="ModernTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#DDDDDD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="PART_TextBox"
+                             Text="{TemplateBinding Text}"
+                             BorderBrush="{TemplateBinding BorderBrush}"
+                             BorderThickness="{TemplateBinding BorderThickness}"
+                             Background="{TemplateBinding Background}"
+                             Padding="{TemplateBinding Padding}"
+                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                            <TextBlock x:Name="HintTextBlock"
+                               Text="{TemplateBinding Tag}"
+                               Foreground="Gray"
+                               Visibility="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource StringNullOrEmptyToVisibilityConverter}}"
+                               Margin="0,2,0,0"
+                               FontSize="12"
+                               FontStyle="Italic"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top" Grid.Row="1" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="PART_TextBox" Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="PART_TextBox" Property="Background" Value="#F7F7F7"/>
+                                <Setter TargetName="PART_TextBox" Property="BorderBrush" Value="#B7B7B7"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="PART_TextBox" Property="BorderBrush" Value="#297ACC"/>
+                            </Trigger>
+                            <Trigger Property="IsReadOnly" Value="True">
+                                <Setter TargetName="PART_TextBox" Property="Background" Value="Transparent"/>
+                                <Setter TargetName="PART_TextBox" Property="BorderBrush" Value="Transparent"/>
+                                <Setter TargetName="PART_TextBox" Property="Foreground" Value="#999999"/>
+                            </Trigger>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter TargetName="PART_TextBox" Property="BorderBrush" Value="#FF7070"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                         From="0"
+                                         To="1"
+                                         Duration="0:0:1" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+
+
+        <!-- ModernDatePickerStyle -->
+        <Style x:Key="ModernDatePickerStyle" TargetType="DatePicker">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="BorderThickness" Value="1" />
+
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+
+        <!-- ModernMemoTextBoxStyle -->
+        <Style x:Key="ModernMemoTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="BorderThickness" Value="1" />
+
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="AcceptsReturn" Value="True" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+
+        <!-- ModernComboBoxStyle -->
+        <Style x:Key="ModernComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="BorderThickness" Value="1" />
+
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+
+        <!-- ModernCheckBoxStyle -->
+        <Style x:Key="ModernCheckBoxStyle" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+
+
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="PART_Border"
+                        Cursor="Hand"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{StaticResource AppCornerRadius}"
+                        Width="{Binding Width, FallbackValue=auto}"
+                        Padding="5, 0"
+                        MinWidth="{Binding MinWidth, FallbackValue=100}"
+                        Height="35"
+                        Margin="5, 0">
+                            <ContentPresenter x:Name="PART_ContentPresenter"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      TextElement.FontSize="14"
+                                      TextElement.FontFamily="{StaticResource Montserrat_Semibold}"
+                                      TextElement.FontStretch="Expanded"
+                                      TextElement.Foreground="{TemplateBinding Foreground}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="PART_Border" Property="Background" Value="#004FC4" />
+                                <Setter TargetName="PART_ContentPresenter" Property="TextElement.Foreground" Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="PART_Border" Property="Background" Value="DarkGray" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="PART_Border" Property="Opacity" Value="0.5" />
+                            </Trigger>
+                            <Trigger Property="Visibility" Value="Visible">
+                                <Setter TargetName="PART_Border" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                            <Trigger Property="Visibility" Value="Collapsed">
+                                <Setter TargetName="PART_Border" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+    </Window.Resources>
+    <Border CornerRadius="{StaticResource AppCornerRadius}" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <local:WindowHeader Grid.Row="0" HeaderTitle="Scanner Example" />
+            <Border Grid.Row="1" BorderThickness="2" Margin="0,10,0,0" BorderBrush="LightSlateGray">
+                <Grid Margin="20,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Button Command="{Binding StartScanCommand}" Style="{StaticResource CustomButtonStyle}"  Background="Transparent" BorderBrush="{StaticResource PrimaryBlueColor}">
+                            Start Scan
+                        </Button>
+                        <Button Command="{Binding StopScanCommand}" Style="{StaticResource CustomButtonStyle}"  Background="Transparent" BorderBrush="{StaticResource PrimaryBlueColor}">
+                            Stop Scan
+                        </Button>
+
+                    </StackPanel>
+                    <TextBlock x:Name="breadcrumbsTextBlock" HorizontalAlignment="Left" MaxWidth="600" TextTrimming="WordEllipsis" FontSize="20" VerticalAlignment="Center" Margin="10,0,0,0" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <TextBlock Text="Select Scanner:" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="14"/>
+
+                        <ComboBox ItemsSource="{Binding Scanners}" SelectedItem="{Binding SelectedScanner}" Margin="5" Height="30" Width="200">
+                            <ComboBox.ItemContainerStyle>
+                                <Style TargetType="ComboBoxItem">
+                                    <Setter Property="Padding" Value="5"/>
+                                    <Setter Property="FontSize" Value="14"/>
+                                </Style>
+                            </ComboBox.ItemContainerStyle>
+                        </ComboBox>
+                       
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.25*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" BorderBrush="#888" BorderThickness="0,0,0,0">
+                    <ListBox x:Name="imageListBox" 
+                     ItemsSource="{Binding ImageList}" 
+                     SelectedItem="{Binding SelectedImage}">    
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Height="100" Margin="30" Background="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image Source="{Binding}" Stretch="UniformToFill" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+
+
+
+
+
+
+                </Border>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="180" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Grid.RowSpan="2">
+                        <Image Source="{Binding SelectedImage}" />
+                    </Grid>
+                </Grid>
+            </Grid>
+
+
+        </Grid>
+    </Border>
+</Window>

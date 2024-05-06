@@ -1,0 +1,205 @@
+﻿using ScannerDrivers.TWAIN.Contants.Capability.Enum;
+using ScannerDrivers.TWAIN.Contants.Enum;
+using ScannerDrivers.TWAIN.Contants.ImageAttributes;
+using static ScannerDrivers.TWAIN.Contants.Enum.ExtendedImage;
+
+namespace ScannerDrivers.TWAIN
+{
+    public partial class TWAINSDK
+    {
+        /// <summary>
+        /// Convert a value to the 'friendly' name, based on the capability...
+        /// </summary>
+        /// <param name="a_cap">capability driving the conversion</param>
+        /// <param name="szValue">value to convert</param>
+        /// <returns></returns>
+        public static string CvtCapValueToEnum(Capabilities a_cap, string a_szValue)
+        {
+            switch (a_cap)
+            {
+                default: return (a_szValue);
+                case Capabilities.ACAP_XFERMECH: return (CvtCapValueToEnumHelper<ICAP_XFERMECH>(a_szValue));
+                case Capabilities.CAP_ALARMS: return (CvtCapValueToEnumHelper<CAP_ALARMS>(a_szValue));
+                case Capabilities.CAP_ALARMVOLUME: return (a_szValue);
+                case Capabilities.CAP_AUTHOR: return (a_szValue);
+                case Capabilities.CAP_AUTOFEED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_AUTOMATICCAPTURE: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_AUTOMATICSENSEMEDIUM: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_AUTOSCAN: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_BATTERYMINUTES: return (a_szValue);
+                case Capabilities.CAP_BATTERYPERCENTAGE: return (a_szValue);
+                case Capabilities.CAP_CAMERAENABLED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_CAMERAORDER: return (CvtCapValueToEnumHelper<ICAP_PIXELTYPE>(a_szValue));
+                case Capabilities.CAP_CAMERAPREVIEWUI: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_CAMERASIDE: return (CvtCapValueToEnumHelper<TWCS>(a_szValue));
+                case Capabilities.CAP_CAPTION: return (a_szValue);
+                case Capabilities.CAP_CLEARPAGE: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_CUSTOMDSDATA: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_CUSTOMINTERFACEGUID: return (a_szValue);
+                case Capabilities.CAP_DEVICEEVENT: return (CvtCapValueToEnumHelper<CAP_DEVICEEVENT>(a_szValue));
+                case Capabilities.CAP_DEVICEONLINE: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_DEVICETIMEDATE: return (a_szValue);
+                case Capabilities.CAP_DOUBLEFEEDDETECTION: return (CvtCapValueToEnumHelper<CAP_DOUBLEFEEDDETECTION>(a_szValue));
+                case Capabilities.CAP_DOUBLEFEEDDETECTIONLENGTH: return (a_szValue);
+                case Capabilities.CAP_DOUBLEFEEDDETECTIONRESPONSE: return (CvtCapValueToEnumHelper<CAP_DOUBLEFEEDDETECTIONRESPONSE>(a_szValue));
+                case Capabilities.CAP_DOUBLEFEEDDETECTIONSENSITIVITY: return (CvtCapValueToEnumHelper<CAP_DOUBLEFEEDDETECTIONSENSITIVITY>(a_szValue));
+                case Capabilities.CAP_DUPLEX: return (CvtCapValueToEnumHelper<CAP_DUPLEX>(a_szValue));
+                case Capabilities.CAP_DUPLEXENABLED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_ENABLEDSUIONLY: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_ENDORSER: return (a_szValue);
+                case Capabilities.CAP_EXTENDEDCAPS: return (CvtCapValueToEnumHelper<Capabilities>(a_szValue));
+                case Capabilities.CAP_FEEDERALIGNMENT: return (CvtCapValueToEnumHelper<CAP_FEEDERALIGNMENT>(a_szValue));
+                case Capabilities.CAP_FEEDERENABLED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_FEEDERLOADED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_FEEDERORDER: return (CvtCapValueToEnumHelper<CAP_FEEDERORDER>(a_szValue));
+                case Capabilities.CAP_FEEDERPOCKET: return (CvtCapValueToEnumHelper<CAP_FEEDERPOCKET>(a_szValue));
+                case Capabilities.CAP_FEEDERPREP: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_FEEDPAGE: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_IAFIELDA_LASTPAGE: return (a_szValue);
+                case Capabilities.CAP_IAFIELDB_LASTPAGE: return (a_szValue);
+                case Capabilities.CAP_IAFIELDC_LASTPAGE: return (a_szValue);
+                case Capabilities.CAP_IAFIELDD_LASTPAGE: return (a_szValue);
+                case Capabilities.CAP_IAFIELDA_LEVEL: return (CvtCapValueToEnumHelper<CAP_IAFIELD>(a_szValue));
+                case Capabilities.CAP_IAFIELDB_LEVEL: return (CvtCapValueToEnumHelper<CAP_IAFIELD>(a_szValue));
+                case Capabilities.CAP_IAFIELDC_LEVEL: return (CvtCapValueToEnumHelper<CAP_IAFIELD>(a_szValue));
+                case Capabilities.CAP_IAFIELDD_LEVEL: return (CvtCapValueToEnumHelper<CAP_IAFIELD>(a_szValue));
+                case Capabilities.CAP_IAFIELDA_PRINTFORMAT: return (a_szValue);
+                case Capabilities.CAP_IAFIELDB_PRINTFORMAT: return (a_szValue);
+                case Capabilities.CAP_IAFIELDC_PRINTFORMAT: return (a_szValue);
+                case Capabilities.CAP_IAFIELDD_PRINTFORMAT: return (a_szValue);
+                case Capabilities.CAP_IAFIELDA_VALUE: return (a_szValue);
+                case Capabilities.CAP_IAFIELDB_VALUE: return (a_szValue);
+                case Capabilities.CAP_IAFIELDC_VALUE: return (a_szValue);
+                case Capabilities.CAP_IAFIELDD_VALUE: return (a_szValue);
+                case Capabilities.CAP_IMAGEADDRESSENABLED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_INDICATORS: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_INDICATORSMODE: return (CvtCapValueToEnumHelper<CAP_INDICATORSMODE>(a_szValue));
+                case Capabilities.CAP_JOBCONTROL: return (CvtCapValueToEnumHelper<CAP_JOBCONTROL>(a_szValue));
+                case Capabilities.CAP_LANGUAGE: return (CvtCapValueToEnumHelper<Languages>(a_szValue));
+                case Capabilities.CAP_MAXBATCHBUFFERS: return (a_szValue);
+                case Capabilities.CAP_MICRENABLED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_PAPERDETECTABLE: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_PAPERHANDLING: return (CvtCapValueToEnumHelper<CAP_PAPERHANDLING>(a_szValue));
+                case Capabilities.CAP_POWERSAVETIME: return (a_szValue);
+                case Capabilities.CAP_POWERSUPPLY: return (CvtCapValueToEnumHelper<CAP_POWERSUPPLY>(a_szValue));
+                case Capabilities.CAP_PRINTER: return (CvtCapValueToEnumHelper<CAP_PRINTER>(a_szValue));
+                case Capabilities.CAP_PRINTERCHARROTATION: return (a_szValue);
+                case Capabilities.CAP_PRINTERENABLED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_PRINTERFONTSTYLE: return (CvtCapValueToEnumHelper<ICAP_PIXELFLAVOR>(a_szValue));
+                case Capabilities.CAP_PRINTERINDEX: return (a_szValue);
+                case Capabilities.CAP_PRINTERINDEXLEADCHAR: return (a_szValue);
+                case Capabilities.CAP_PRINTERINDEXMAXVALUE: return (a_szValue);
+                case Capabilities.CAP_PRINTERINDEXNUMDIGITS: return (a_szValue);
+                case Capabilities.CAP_PRINTERINDEXSTEP: return (a_szValue);
+                case Capabilities.CAP_PRINTERINDEXTRIGGER: return (CvtCapValueToEnumHelper<CAP_PRINTERINDEXTRIGGER>(a_szValue));
+                case Capabilities.CAP_PRINTERMODE: return (CvtCapValueToEnumHelper<CAP_PRINTERMODE>(a_szValue));
+                case Capabilities.CAP_PRINTERSTRING: return (a_szValue);
+                case Capabilities.CAP_PRINTERSTRINGPREVIEW: return (a_szValue);
+                case Capabilities.CAP_PRINTERSUFFIX: return (a_szValue);
+                case Capabilities.CAP_PRINTERVERTICALOFFSET: return (a_szValue);
+                case Capabilities.CAP_REACQUIREALLOWED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_REWINDPAGE: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_SEGMENTED: return (CvtCapValueToEnumHelper<CAP_SEGMENTED>(a_szValue));
+                case Capabilities.CAP_SERIALNUMBER: return (a_szValue);
+                case Capabilities.CAP_SHEETCOUNT: return (a_szValue);
+                case Capabilities.CAP_SUPPORTEDCAPS: return (CvtCapValueToEnumHelper<Capabilities>(a_szValue));
+                case Capabilities.CAP_SUPPORTEDCAPSSEGMENTUNIQUE: return (CvtCapValueToEnumHelper<Capabilities>(a_szValue));
+                case Capabilities.CAP_SUPPORTEDDATS: return (CvtCapValueToEnumHelper<DataArgumentTypes>(a_szValue));
+                case Capabilities.CAP_THUMBNAILSENABLED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_TIMEBEFOREFIRSTCAPTURE: return (a_szValue);
+                case Capabilities.CAP_TIMEBETWEENCAPTURES: return (a_szValue);
+                case Capabilities.CAP_TIMEDATE: return (a_szValue);
+                case Capabilities.CAP_UICONTROLLABLE: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.CAP_XFERCOUNT: return (a_szValue);
+                case Capabilities.ICAP_AUTOBRIGHT: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_AUTODISCARDBLANKPAGES: return (a_szValue);
+                case Capabilities.ICAP_AUTOMATICBORDERDETECTION: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_AUTOMATICCOLORENABLED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_AUTOMATICCOLORNONCOLORPIXELTYPE: return (CvtCapValueToEnumHelper<ICAP_PIXELTYPE>(a_szValue));
+                case Capabilities.ICAP_AUTOMATICCROPUSESFRAME: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_AUTOMATICDESKEW: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_AUTOMATICLENGTHDETECTION: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_AUTOMATICROTATE: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_AUTOSIZE: return (CvtCapValueToEnumHelper<ICAP_AUTOSIZE>(a_szValue));
+                case Capabilities.ICAP_BARCODEDETECTIONENABLED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_BARCODEMAXRETRIES: return (a_szValue);
+                case Capabilities.ICAP_BARCODEMAXSEARCHPRIORITIES: return (a_szValue);
+                case Capabilities.ICAP_BARCODESEARCHMODE: return (CvtCapValueToEnumHelper<ICAP_BARCODESEARCHMODE>(a_szValue));
+                case Capabilities.ICAP_BARCODESEARCHPRIORITIES: return (CvtCapValueToEnumHelper<TWBT>(a_szValue));
+                case Capabilities.ICAP_BARCODETIMEOUT: return (a_szValue);
+                case Capabilities.ICAP_BITDEPTH: return (a_szValue);
+                case Capabilities.ICAP_BITDEPTHREDUCTION: return (CvtCapValueToEnumHelper<ICAP_BITDEPTHREDUCTION>(a_szValue));
+                case Capabilities.ICAP_BITORDER: return (CvtCapValueToEnumHelper<ICAP_BITORDER>(a_szValue));
+                case Capabilities.ICAP_BITORDERCODES: return (CvtCapValueToEnumHelper<ICAP_BITORDER>(a_szValue));
+                case Capabilities.ICAP_BRIGHTNESS: return (a_szValue);
+                case Capabilities.ICAP_CCITTKFACTOR: return (a_szValue);
+                case Capabilities.ICAP_COLORMANAGEMENTENABLED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_COMPRESSION: return (CvtCapValueToEnumHelper<ICAP_COMPRESSION>(a_szValue));
+                case Capabilities.ICAP_CONTRAST: return (a_szValue);
+                case Capabilities.ICAP_CUSTHALFTONE: return (a_szValue);
+                case Capabilities.ICAP_EXPOSURETIME: return (a_szValue);
+                case Capabilities.ICAP_EXTIMAGEINFO: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_FEEDERTYPE: return (CvtCapValueToEnumHelper<ICAP_FEEDERTYPE>(a_szValue));
+                case Capabilities.ICAP_FILMTYPE: return (CvtCapValueToEnumHelper<ICAP_FILMTYPE>(a_szValue));
+                case Capabilities.ICAP_FILTER: return (CvtCapValueToEnumHelper<ICAP_FILTER>(a_szValue));
+                case Capabilities.ICAP_FLASHUSED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_FLASHUSED2: return (CvtCapValueToEnumHelper<ICAP_FLASHUSED2>(a_szValue));
+                case Capabilities.ICAP_FLIPROTATION: return (CvtCapValueToEnumHelper<ICAP_FLIPROTATION>(a_szValue));
+                case Capabilities.ICAP_FRAMES: return (a_szValue);
+                case Capabilities.ICAP_GAMMA: return (a_szValue);
+                case Capabilities.ICAP_HALFTONES: return (a_szValue);
+                case Capabilities.ICAP_HIGHLIGHT: return (a_szValue);
+                case Capabilities.ICAP_ICCPROFILE: return (CvtCapValueToEnumHelper<ICAP_ICCPROFILE>(a_szValue));
+                case Capabilities.ICAP_IMAGEDATASET: return (a_szValue);
+                case Capabilities.ICAP_IMAGEFILEFORMAT: return (CvtCapValueToEnumHelper<ICAP_IMAGEFILEFORMAT>(a_szValue));
+                case Capabilities.ICAP_IMAGEFILTER: return (CvtCapValueToEnumHelper<ICAP_IMAGEFILTER>(a_szValue));
+                case Capabilities.ICAP_IMAGEMERGE: return (CvtCapValueToEnumHelper<ICAP_IMAGEMERGE>(a_szValue));
+                case Capabilities.ICAP_IMAGEMERGEHEIGHTTHRESHOLD: return (a_szValue);
+                case Capabilities.ICAP_JPEGPIXELTYPE: return (CvtCapValueToEnumHelper<ICAP_PIXELTYPE>(a_szValue));
+                case Capabilities.ICAP_JPEGQUALITY: return (CvtCapValueToEnumHelper<ICAP_JPEGQUALITY>(a_szValue));
+                case Capabilities.ICAP_JPEGSUBSAMPLING: return (CvtCapValueToEnumHelper<ICAP_JPEGSUBSAMPLING>(a_szValue));
+                case Capabilities.ICAP_LAMPSTATE: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_LIGHTPATH: return (CvtCapValueToEnumHelper<ICAP_LIGHTPATH>(a_szValue));
+                case Capabilities.ICAP_LIGHTSOURCE: return (CvtCapValueToEnumHelper<ICAP_LIGHTSOURCE>(a_szValue));
+                case Capabilities.ICAP_MAXFRAMES: return (a_szValue);
+                case Capabilities.ICAP_MINIMUMHEIGHT: return (a_szValue);
+                case Capabilities.ICAP_MINIMUMWIDTH: return (a_szValue);
+                case Capabilities.ICAP_MIRROR: return (CvtCapValueToEnumHelper<ICAP_MIRROR>(a_szValue));
+                case Capabilities.ICAP_NOISEFILTER: return (CvtCapValueToEnumHelper<ICAP_NOISEFILTER>(a_szValue));
+                case Capabilities.ICAP_ORIENTATION: return (CvtCapValueToEnumHelper<ICAP_ORIENTATION>(a_szValue));
+                case Capabilities.ICAP_OVERSCAN: return (CvtCapValueToEnumHelper<ICAP_OVERSCAN>(a_szValue));
+                case Capabilities.ICAP_PATCHCODEDETECTIONENABLED: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_PATCHCODEMAXRETRIES: return (a_szValue);
+                case Capabilities.ICAP_PATCHCODEMAXSEARCHPRIORITIES: return (a_szValue);
+                case Capabilities.ICAP_PATCHCODESEARCHMODE: return (CvtCapValueToEnumHelper<ICAP_BARCODESEARCHMODE>(a_szValue));
+                case Capabilities.ICAP_PATCHCODESEARCHPRIORITIES: return (CvtCapValueToEnumHelper<TWEI_PATCHCODE>(a_szValue));
+                case Capabilities.ICAP_PATCHCODETIMEOUT: return (a_szValue);
+                case Capabilities.ICAP_PHYSICALHEIGHT: return (a_szValue);
+                case Capabilities.ICAP_PHYSICALWIDTH: return (a_szValue);
+                case Capabilities.ICAP_PIXELFLAVOR: return (CvtCapValueToEnumHelper<ICAP_PIXELFLAVOR>(a_szValue));
+                case Capabilities.ICAP_PIXELFLAVORCODES: return (CvtCapValueToEnumHelper<ICAP_PIXELFLAVOR>(a_szValue));
+                case Capabilities.ICAP_PIXELTYPE: return (CvtCapValueToEnumHelper<ICAP_PIXELTYPE>(a_szValue));
+                case Capabilities.ICAP_PLANARCHUNKY: return (CvtCapValueToEnumHelper<ICAP_PLANARCHUNKY>(a_szValue));
+                case Capabilities.ICAP_ROTATION: return (a_szValue);
+                case Capabilities.ICAP_SHADOW: return (a_szValue);
+                case Capabilities.ICAP_SUPPORTEDBARCODETYPES: return (CvtCapValueToEnumHelper<TWBT>(a_szValue));
+                case Capabilities.ICAP_SUPPORTEDEXTIMAGEINFO: return (CvtCapValueToEnumHelper<TWEI>(a_szValue));
+                case Capabilities.ICAP_SUPPORTEDPATCHCODETYPES: return (CvtCapValueToEnumHelper<TWEI_PATCHCODE>(a_szValue));
+                case Capabilities.ICAP_SUPPORTEDSIZES: return (CvtCapValueToEnumHelper<ICAP_SUPPORTEDSIZES>(a_szValue));
+                case Capabilities.ICAP_THRESHOLD: return (a_szValue);
+                case Capabilities.ICAP_TILES: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_TIMEFILL: return (a_szValue);
+                case Capabilities.ICAP_UNDEFINEDIMAGESIZE: return (CvtCapValueToEnumHelper<bool>(a_szValue));
+                case Capabilities.ICAP_UNITS: return (CvtCapValueToEnumHelper<ICAP_UNITS>(a_szValue));
+                case Capabilities.ICAP_XFERMECH: return (CvtCapValueToEnumHelper<ICAP_XFERMECH>(a_szValue));
+                case Capabilities.ICAP_XNATIVERESOLUTION: return (a_szValue);
+                case Capabilities.ICAP_XRESOLUTION: return (a_szValue);
+                case Capabilities.ICAP_XSCALING: return (a_szValue);
+                case Capabilities.ICAP_YNATIVERESOLUTION: return (a_szValue);
+                case Capabilities.ICAP_YRESOLUTION: return (a_szValue);
+                case Capabilities.ICAP_YSCALING: return (a_szValue);
+                case Capabilities.ICAP_ZOOMFACTOR: return (a_szValue);
+            }
+        }
+    }
+}
