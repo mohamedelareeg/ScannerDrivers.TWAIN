@@ -35,13 +35,7 @@ namespace ScannerDrivers.CaptureExample
             get { return _scanners; }
             set
             {
-                if (SetProperty(ref _scanners, value))
-                {
-                    if (Scanners != null && Scanners.Count > 0)
-                    {
-                        SelectedScanner = Scanners[0];
-                    }
-                }
+                SetProperty(ref _scanners, value);
             }
         }
 
@@ -49,7 +43,13 @@ namespace ScannerDrivers.CaptureExample
         public string SelectedScanner
         {
             get { return _selectedScanner; }
-            set { SetProperty(ref _selectedScanner, value); }
+            set
+            {
+                if (SetProperty(ref _selectedScanner, value))
+                {
+                    var response = _twainService.SelectScanner(_selectedScanner).Result;
+                }
+            }
         }
 
         // Commands
@@ -107,10 +107,10 @@ namespace ScannerDrivers.CaptureExample
                 if (scannerListResponse != null)
                 {
                     Scanners = new ObservableCollection<string>(scannerListResponse);
-                    if (Scanners.Count > 0)
-                    {
-                        SelectedScanner = Scanners.FirstOrDefault();
-                    }
+                    //if (Scanners.Count > 0)
+                    //{
+                    //    SelectedScanner = Scanners.FirstOrDefault();
+                    //}
                 }
             }
             catch (Exception ex)
@@ -136,50 +136,57 @@ namespace ScannerDrivers.CaptureExample
         }
         private async void OnImageAcquired(object sender, ImageEventArgs e)
         {
-            string imagepath = Path.Combine("C:\\Demo-Scanning", e.ImageData.ImageGUID + ".tif");
-            using (var image = SixLabors.ImageSharp.Image.Load(e.ImageData.ImageBytes))
+            await Task.Run(() =>
             {
-                using (FileStream fileStream = new FileStream(imagepath, FileMode.Create))
+                string imagepath = Path.Combine("C:\\Demo-Scanning", e.ImageData.ImageGUID + ".tif");
+                using (var image = SixLabors.ImageSharp.Image.Load(e.ImageData.ImageBytes))
                 {
-                    image.SaveAsJpeg(fileStream, new JpegEncoder { Quality = 80 });
+                    using (FileStream fileStream = new FileStream(imagepath, FileMode.Create))
+                    {
+                        image.SaveAsJpeg(fileStream, new JpegEncoder { Quality = 80 });
+                    }
                 }
-            }
 
-            BitmapImage bitmapImage = new BitmapImage();
-            bitmapImage.BeginInit();
-            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-            bitmapImage.DecodePixelWidth = 800;
-            bitmapImage.DecodePixelHeight = 600;
-            bitmapImage.UriSource = new Uri(imagepath);
-            bitmapImage.EndInit();
-
-            Application.Current.Dispatcher.Invoke(() => ImageList.Add(bitmapImage));
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    BitmapImage bitmapImage = new BitmapImage();
+                    bitmapImage.BeginInit();
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapImage.DecodePixelWidth = 800;
+                    bitmapImage.DecodePixelHeight = 600;
+                    bitmapImage.UriSource = new Uri(imagepath);
+                    bitmapImage.EndInit();
+                    SelectedImage = bitmapImage;
+                    ImageList.Add(bitmapImage);
+                });
+            });
         }
+
 
 
         private void OnScanStopped(object sender, System.EventArgs e)
         {
-            MessageBox.Show("Scan stopped.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            //MessageBox.Show("Scan stopped.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void OnScanPaused(object sender, System.EventArgs e)
         {
-            MessageBox.Show("Scan paused.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            // MessageBox.Show("Scan paused.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void OnErrorOccurred(object sender, string errorMessage)
         {
-            MessageBox.Show($"Error occurred: {errorMessage}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            // MessageBox.Show($"Error occurred: {errorMessage}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void OnTwainInitialized(object sender, System.EventArgs e)
         {
-            MessageBox.Show("TWAIN initialized.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            // MessageBox.Show("TWAIN initialized.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void OnTwainClosed(object sender, System.EventArgs e)
         {
-            MessageBox.Show("TWAIN closed.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            // MessageBox.Show("TWAIN closed.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         #endregion
     }
