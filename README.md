@@ -27,6 +27,10 @@ The repository contains the following components:
 - **Enums.cs**: Enumerations for TWAIN states, capabilities, and other related constants.
 - **TWAINSDK.cs**: Wrapper class for the TWAIN DSM (Data Source Manager) API functions.
 
+## Screenshots
+
+ **Scanning Example Window:**
+   ![Scanning-Example-Window](/screenshots/example.png)
 ## Requirements
 
 - .NET Core 8
